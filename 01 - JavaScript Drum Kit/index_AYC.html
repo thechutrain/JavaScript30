@@ -66,20 +66,34 @@ function playKey(e){
   // 1) get the audio, and play it if it exists
   const audio = document.querySelector("audio[data-key=\'" + e.keyCode + "\'");
   // console.log(audio);
-  if (!audio) return;
+  if (!audio) return; // if no audio, exit the function here!
   audio.currentTime = 0; // reset the audio to zero
   audio.play();
   // 2) find the key that was pressed and apply the transition
   var key = document.querySelector(".key[data-key=\'" + e.keyCode + "\'");
   console.log(key);
   key.classList.add("playing");
-  // 3) remove the transition once it was completed!
 }
 
-window.addEventListener("keyup", function(e){
-  playKey(e);
-}); // closes keyup event listener
-
+// --- Event Listeners ---
+// I) event listener for any key stroke pressed
+window.addEventListener("keyup", playKey);
+// II) event listener for when css styling finishes
+var keys = document.querySelectorAll(".key"); // keys >> NodeList[]
+keys.forEach(function(key){
+  // console.log(key); // the <div class="key">
+  // Add event listener to each key
+  key.addEventListener("transitionend", function(e){
+    // console.log(e); // gives us an event for each css property of 'key' class
+    if (e.propertyName === "box-shadow"){
+      // console.log(e);
+      // remove the playing class
+      this.classList.remove("playing");
+    }
+    // debugger
+    // console.log(this); // is the key, b/c the object that triggers the event!
+  });
+});
 </script>
 
 
