@@ -66,12 +66,35 @@
       transform-origin: 100%;
     }
 
+    .second-hand {
+      height: 2px;
+    }
+
+    .min-hand {
+      background-color: gray;
+    }
+
   </style>
 
   <script>
   setInterval(function(){
     // console.log("hi");
     var currentTime = new Date();
+    // console.log(currentTime);
+    // console.log(currentTime.getSeconds());
+    // 1) adjust the position of the seconds hand
+    var angle_sec = ((currentTime.getSeconds() / 60) *360 + 90) % 360;
+    var angle_min = ((currentTime.getMinutes() / 60) *360 + 90) % 360;
+    var angle_hour = ((currentTime.getHours() / 12) *360 + 90) % 360;
+    // var angle_hour = (currentTime.getHours() / 12) * 360 ;
+    // console.log( ((currentTime.getHours() / 24) * 360 ) );
+    // console.log(angle + ": " + currentTime.getSeconds());
+    var secondHand = document.querySelector(".second-hand");
+    secondHand.style.transform = "rotate(" + angle_sec + "deg)";
+    var minuteHand = document.querySelector(".min-hand");
+    minuteHand.style.transform = "rotate(" + angle_min + "deg)";
+    var hourHand = document.querySelector(".hour-hand");
+    hourHand.style.transform = "rotate(" + angle_hour + "deg)";
     console.log(currentTime);
   }, 1000)
 
