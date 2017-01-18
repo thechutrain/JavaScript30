@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+
+<!-- JS code here -->
+<script>
+let keysPressed = [];
+// const secretKey = "ARROWUPARROWRIGHTARROWUPARROWLEFTARROWDOWNARROWLEFT"; // doesn't work
+const secretKey = ["ARROWUP", "ARROWRIGHT", "ARROWUP", "ARROWLEFT", "ARROWDOWN", "ARROWLEFT"];
+
+// get the keys the user keysPressed
+document.addEventListener("keyup", (event)=>{  
+    keysPressed.push(event.key.toUpperCase());
+    // console.log(keysPressed);
+
+    //get the last 6 letters
+    keysPressed.splice(-secretKey.length-1, keysPressed.length - secretKey.length)
+    if (keysPressed.join("") == secretKey.join("")){
+      console.log("You found it!!!");
+      // debugger;
+      cornify_add();
+    };
+});
+
+</script>
+</body>
+</html>
